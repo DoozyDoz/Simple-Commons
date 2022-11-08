@@ -25,10 +25,10 @@ class ConfirmationDialog(
 
     init {
         val view = activity.layoutInflater.inflate(R.layout.dialog_message, null)
-        view.message.text = if (message.isEmpty()) activity.resources.getString(messageId) else message
+        view.message.text = message.ifEmpty { activity.resources.getString(messageId) }
 
         val builder = activity.getAlertDialogBuilder()
-            .setPositiveButton(positive) { dialog, which -> dialogConfirmed() }
+            .setPositiveButton(positive) { _, _ -> dialogConfirmed() }
 
         if (negative != 0) {
             builder.setNegativeButton(negative, null)
